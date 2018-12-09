@@ -1,0 +1,2 @@
+﻿SELECT i.*, t.* FROM {0} m
+WHERE m.item_id = {1}
