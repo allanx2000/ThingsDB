@@ -106,8 +106,9 @@ namespace RateIt.GUI.Data
 
         public Tag AddTag(int categoryId, string name)
         {
-            string cmd = string.Format("insert into {0} values(NULL,'{1}')", TagsTable,
-               SQLUtils.SQLEncode(name));
+            string cmd = string.Format("insert into {0} values(NULL,'{1}', {2})", TagsTable,
+               SQLUtils.SQLEncode(name),
+               categoryId);
             client.ExecuteNonQuery(cmd);
 
             int id = SQLUtils.GetLastInsertRow(client);
@@ -128,7 +129,7 @@ namespace RateIt.GUI.Data
                 //Upsert Item
                 if (item.ID == 0)
                 {
-                    cmd = string.Format("insert into {0} values(NULL, '{1}', {2})",
+                    cmd = string.Format("insert into {0} values(NULL, '{1}', '{2}', {3})",
                         ItemsTable,
                         SQLUtils.ToSQLDateTime(DateTime.Now),
                         SQLUtils.SQLEncode(item.Name),
@@ -178,30 +179,33 @@ namespace RateIt.GUI.Data
 
         public Item GetItem(int id)
         {
-            string cmd;
-            cmd = string.Format(LoadFromText("SelectItem", ItemsTable, id));
+            string cmd = string.Format("select * from {0} where item_id={1}", ItemsTable, id);
 
             DataTable data = client.ExecuteSelect(cmd);
             if (data.Rows.Count == 0)
                 return null;
 
-            Item item = null;
-            
+            Item item = ParseBasicItem(data.Rows[0]);
+            item.Tags = GetTagsForItem(id);
+
+            return item;
+        }
+
+        private List<Tag> GetTagsForItem(int id)
+        {
+            List<Tag> tags = new List<Tag>();
+
+            string cmd = string.Format("select t.* from {0} m join {1} t on m.tag_id = t.tag_id where m.item_id={2}",
+                ItemTagsTable, TagsTable, id);
+
+            DataTable data = client.ExecuteSelect(cmd);
+
             foreach (DataRow r in data.Rows)
             {
-                if (item == null)
-                {
-                    item = ParseBasicItem(r);
-
-                    List<Tag> tags = new List<Tag>();
-                    item.Tags = tags;
-
-                    tags.Add(ParseTag(r));
-                }
-
-                //ParseTag
+                tags.Add(ParseTag(r));
             }
-            return item;
+
+            return tags;
         }
 
         private Item ParseBasicItem(DataRow r)
@@ -230,7 +234,7 @@ namespace RateIt.GUI.Data
 
         public Category GetCategory(int id)
         {
-            string cmd = string.Format("select * from {0} where id = {1}", CategoryTable, id);
+            string cmd = string.Format("select * from {0} where category_id = {1}", CategoryTable, id);
 
             var dt = client.ExecuteSelect(cmd);
 
