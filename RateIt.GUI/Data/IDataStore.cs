@@ -11,8 +11,11 @@ namespace RateIt.GUI.Data
     {
         Category AddCategory(string name);
         Tag AddTag(int categoryId, string name);
-        Item AddItem(Item item);
+        Item UpsertItem(Item item);
         Item GetItem(int id);
+
+        List<Item> GetItemsForTag(int tagId);
+        Tag GetTag(int tagId);
 
         Category GetCategory(int id);
     }

@@ -117,7 +117,7 @@ namespace RateIt.GUI.Data
             return t;
         }
 
-        public Item AddItem(Item item)
+        public Item UpsertItem(Item item)
         {
 
             var txn = client.GetConnection().BeginTransaction();
@@ -143,7 +143,6 @@ namespace RateIt.GUI.Data
                 {
                     cmd = string.Format("update {0} set name='{1}', category_id={2} where id = {3}",
                         ItemsTable,
-                        SQLUtils.ToSQLDateTime(DateTime.Now),
                         SQLUtils.SQLEncode(item.Name),
                         item.Category.ID,
                         item.ID
@@ -168,7 +167,7 @@ namespace RateIt.GUI.Data
 
                 txn.Commit();
 
-                return item;
+                return GetItem(item.ID);
             }
             catch (Exception e)
             {
@@ -212,6 +211,8 @@ namespace RateIt.GUI.Data
         {
             Item item = new Item();
             item.ID = Convert.ToInt32(r["item_id"]);
+            item.Name = r["item_name"].ToString();
+            item.CreatedDate = SQLUtils.ToDateTime(r["created_date"].ToString());
 
             if (!SQLUtils.IsNull(r["category_id"]))
             {
@@ -249,5 +250,31 @@ namespace RateIt.GUI.Data
             return cat;
         }
 
+        public List<Item> GetItemsForTag(int tagId)
+        {
+            List<Item> items = new List<Item>();
+
+            string cmd = string.Format("select item_id from {0} m where m.tag_id={1}",
+                ItemTagsTable, tagId);
+
+            DataTable data = client.ExecuteSelect(cmd);
+
+            foreach (DataRow r in data.Rows)
+            {
+                items.Add(GetItem(Convert.ToInt32(r["item_id"])));
+            }
+
+            return items;
+        }
+
+        public Tag GetTag(int tagId)
+        {
+            var dt = client.ExecuteSelect(string.Format("select * from {0} where tag_id = {1}", TagsTable, tagId));
+
+            if (dt.Rows.Count == 0)
+                return null;
+
+            return ParseTag(dt.Rows[0]);
+        }
     }
 }

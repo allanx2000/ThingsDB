@@ -32,7 +32,7 @@ namespace RateIt.GUI
         private void TestDB()
         {
             IDataStore ds = new SQLDataStore(@"E:\rateIt.db");
-            /*
+
             Category cat = ds.AddCategory("Movies");
 
             Tag t1 = ds.AddTag(cat.ID, "Prime");
@@ -43,9 +43,15 @@ namespace RateIt.GUI
             List<Tag> tags = new List<Tag>() { t1, t2 };
             item.Tags = tags;
 
-            Item i = ds.AddItem(item);
-            */
-            Item item2 = ds.GetItem(1);
+            Item i = ds.UpsertItem(item);
+            
+            Item item2 = new Item(cat, "Test2");
+            
+            item2.Tags = new List<Tag>();
+            item2.Tags.Add(ds.GetTag(1));
+            ds.UpsertItem(item2);
+
+            var items = ds.GetItemsForTag(1);
 
             string s = "";
         }
