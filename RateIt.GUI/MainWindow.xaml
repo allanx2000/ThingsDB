@@ -3,10 +3,53 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:RateIt.GUI"
+        xmlns:ctrl="clr-namespace:RateIt.GUI.Controls"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        WindowStartupLocation="CenterScreen"
+        Title="RateIt" Height="500" Width="400">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Menu Grid.Row="0"></Menu>
+        <GroupBox Grid.Row="1" Header="Search">
+            <ctrl:SmartGrid Orientation="Horizontal">
+                <ctrl:SmartGrid.SizeDefinitions>
+                    <ctrl:SizeDefinition Size="Auto"/>
+                    <ctrl:SizeDefinition Size="*"/>
+                    <ctrl:SizeDefinition Size="Auto"/>
+                </ctrl:SmartGrid.SizeDefinitions>
+
+                <ctrl:SmartGrid.Content>
+                    <Label FontWeight="Bold" Style="{StaticResource GridField}">Category: </Label>
+                    <ComboBox ItemsSource="{Binding Categories}"/>
+                    <Button Command="{Binding ManageCategoriesCommand}">...</Button>
+
+                    <Label FontWeight="Bold" Style="{StaticResource GridField}">Tags: </Label>
+                    <Label HorizontalAlignment="Left" Style="{StaticResource GridField}">
+                        <TextBlock Text="{Binding SelectedTagsText, FallbackValue='SelectedTagsText'}"/>
+                    </Label>
+                    <Button Command="{Binding ManageTagsCommand}">...</Button>
+
+                    <Label FontWeight="Bold" Style="{StaticResource GridField}">Name: </Label>
+                    <TextBox Text="{Binding TextSearch}"/>
+                    <CheckBox>
+                        Rated
+                    </CheckBox>
+
+                    <StackPanel Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button>Search</Button>
+                    </StackPanel>
+                    
+                </ctrl:SmartGrid.Content>
+            </ctrl:SmartGrid>
+        </GroupBox>
+
+        <ListBox Grid.Row="2" Background="Aqua">
+            
+        </ListBox>
     </Grid>
 </Window>

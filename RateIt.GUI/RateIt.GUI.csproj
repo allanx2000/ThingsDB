@@ -67,6 +67,7 @@
     <Compile Include="Controls\SmartGrid.xaml.cs">
       <DependentUpon>SmartGrid.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\DatabaseItem.cs" />
     <Compile Include="SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>

@@ -49,9 +49,9 @@ namespace RateIt.GUI.Controls
             }
         }
 
-        public static readonly DependencyProperty ContentProperty = DependencyProperty.Register("Content", typeof(List<UIElement>), typeof(SmartGrid));
+        public new static readonly DependencyProperty ContentProperty = DependencyProperty.Register("Content", typeof(List<UIElement>), typeof(SmartGrid));
 
-        public List<UIElement> Content
+        public new List<UIElement> Content
         {
             get
             {

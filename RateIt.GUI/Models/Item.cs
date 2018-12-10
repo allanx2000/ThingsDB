@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RateIt.GUI.Models
 {
-    class Item
+    class Item : DatabaseItem
     {
         public Item()
         {
@@ -18,7 +18,6 @@ namespace RateIt.GUI.Models
             Name = name;
         }
 
-        public int ID { get; set; }
         public string Name { get; set; }
         public DateTime CreatedDate {get; set;}
 
@@ -26,9 +25,7 @@ namespace RateIt.GUI.Models
 
         public List<Tag> Tags { get; set; }
 
-        public override string ToString()
-        {
-            return Name;
-        }
+        public override string Value => Name;
+
     }
 }

@@ -26,36 +26,35 @@ namespace RateIt.GUI
         {
             InitializeComponent();
 
-            //TestDB();
 
             StateManager.Load();
 
+            TestDB();
         }
 
 
 
         private void TestDB()
         {
-            IDataStore ds = new SQLDataStore(@"E:\rateIt.db");
-            /*
-            Category cat = ds.AddCategory("Movies");
+            IDataStore ds = StateManager.Instance.DataStore;
+            if (ds.GetCategory(1) == null)
+            {
+                Category cat = ds.AddCategory("Movies");
 
-            Tag t1 = ds.AddTag(cat.ID, "Prime");
-            Tag t2 = ds.AddTag(cat.ID, "Watched");
+                Tag t1 = ds.AddTag(cat.ID, "Prime");
+                Tag t2 = ds.AddTag(cat.ID, "Watched");
 
-            Item item = new Item(cat, "Test Show");
+                Item item = new Item(cat, "Test Show");
 
-            List<Tag> tags = new List<Tag>() { t1, t2 };
-            item.Tags = tags;
+                item.Tags = new List<Tag>() { t1, t2 };
+                ds.UpsertItem(item);
 
-            Item i = ds.UpsertItem(item);
-            
-            Item item2 = new Item(cat, "Test2");
-            
-            item2.Tags = new List<Tag>();
-            item2.Tags.Add(ds.GetTag(1));
-            ds.UpsertItem(item2);
-            */
+                Item item2 = new Item(cat, "Test2");
+
+                item2.Tags = new List<Tag>();
+                item2.Tags.Add(ds.GetTag(1));
+                ds.UpsertItem(item2);
+            }
 
             var items = ds.GetItemsForTag(1);
 
