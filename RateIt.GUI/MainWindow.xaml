@@ -25,7 +25,9 @@
 
                 <ctrl:SmartGrid.Content>
                     <Label FontWeight="Bold" Style="{StaticResource GridField}">Category: </Label>
-                    <ComboBox ItemsSource="{Binding Categories}"/>
+                    <ComboBox DisplayMemberPath="Name" 
+                              SelectedItem="{Binding SelectedCategory}" 
+                              ItemsSource="{Binding Categories.View}"/>
                     <Button Command="{Binding ManageCategoriesCommand}">...</Button>
 
                     <Label FontWeight="Bold" Style="{StaticResource GridField}">Tags: </Label>
@@ -35,20 +37,20 @@
                     <Button Command="{Binding ManageTagsCommand}">...</Button>
 
                     <Label FontWeight="Bold" Style="{StaticResource GridField}">Name: </Label>
-                    <TextBox Text="{Binding TextSearch}"/>
-                    <CheckBox>
+                    <TextBox Text="{Binding SearchName}"/>
+                    <CheckBox IsChecked="{Binding RatedOnly}">
                         Rated
                     </CheckBox>
 
                     <StackPanel Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Button>Search</Button>
+                        <Button Command="{Binding SearchCommand}">Search</Button>
                     </StackPanel>
                     
                 </ctrl:SmartGrid.Content>
             </ctrl:SmartGrid>
         </GroupBox>
 
-        <ListBox Grid.Row="2" Background="Aqua">
+        <ListBox Grid.Row="2" Background="Aqua" ItemsSource="{Binding Results}">
             
         </ListBox>
     </Grid>

@@ -18,5 +18,8 @@ namespace RateIt.GUI.Data
         Tag GetTag(int tagId);
 
         Category GetCategory(int id);
+        List<Category> GetAllCategories();
+
+        List<Item> Search(SearchCriteria criteria);
     }
 }

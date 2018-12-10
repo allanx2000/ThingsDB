@@ -233,6 +233,30 @@ namespace RateIt.GUI.Data
             return t;
         }
 
+
+        public List<Category> GetAllCategories()
+        {
+            string cmd = "select * from " + CategoryTable;
+
+            var dt = client.ExecuteSelect(cmd);
+
+            List<Category> categories = new List<Category>();
+
+            foreach (DataRow row in dt.Rows)
+            {
+               categories.Add(ParseCategory(row));
+            }
+            return categories;
+        }
+
+        private Category ParseCategory(DataRow row)
+        {
+            return new Category(
+                Convert.ToInt32(row["category_id"]),
+                row["category_name"].ToString()
+                );
+        }
+
         public Category GetCategory(int id)
         {
             string cmd = string.Format("select * from {0} where category_id = {1}", CategoryTable, id);
@@ -241,13 +265,7 @@ namespace RateIt.GUI.Data
 
             if (dt.Rows.Count == 0)
                 return null;
-
-            Category cat = new Category(
-                Convert.ToInt32(dt.Rows[0]["category_id"]),
-                dt.Rows[0]["category_name"].ToString()
-                );
-
-            return cat;
+            else return ParseCategory(dt.Rows[0]);
         }
 
         public List<Item> GetItemsForTag(int tagId)
@@ -275,6 +293,53 @@ namespace RateIt.GUI.Data
                 return null;
 
             return ParseTag(dt.Rows[0]);
+        }
+
+        public List<Item> Search(SearchCriteria criteria)
+        {
+            List<Item> items;
+            if (criteria.HasTags)
+            {
+                items = GetItemsForTags(criteria.Tags);
+                if (!string.IsNullOrEmpty(criteria.Filter))
+                    items = (from i in items
+                             where i.Name.ToLower().Contains(criteria.Filter.ToLower())
+                             select i).ToList();
+
+            }
+            else
+            {
+                items = GetItemsForCategory(criteria.CategoryValue, criteria.Filter);
+                //Utaged
+            }
+
+            //if (criteria.RatedOnly)
+
+            return items;
+        }
+
+        private List<Item> GetItemsForCategory(Category category, string filter = null)
+        {
+            string cmd = $"SELECT * from {ItemsTable} WHERE category_id = {category.ID}";
+            if (!string.IsNullOrEmpty(filter))
+                cmd += " AND item_name LIKE '%"+ SQLUtils.SQLEncode(filter) + "%'";
+
+            List<Item> items = new List<Item>();
+
+            foreach (DataRow r in client.ExecuteSelect(cmd).Rows)
+            {
+                var i = ParseBasicItem(r);
+                i.Tags = GetTagsForItem(i.ID);
+
+                items.Add(i);
+            }
+
+            return items;
+        }
+
+        private List<Item> GetItemsForTags(List<Tag> tags)
+        {
+            throw new NotImplementedException();
         }
     }
 }

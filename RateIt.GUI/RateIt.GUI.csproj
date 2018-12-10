@@ -67,11 +67,13 @@
     <Compile Include="Controls\SmartGrid.xaml.cs">
       <DependentUpon>SmartGrid.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Data\SearchCriteria.cs" />
     <Compile Include="Models\DatabaseItem.cs" />
     <Compile Include="SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="StateManager.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\SettingsWindowViewModel.cs" />
     <Page Include="Controls\SmartGrid.xaml">
       <Generator>MSBuild:Compile</Generator>

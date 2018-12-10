@@ -1,5 +1,6 @@
 ﻿using RateIt.GUI.Data;
 using RateIt.GUI.Models;
+using RateIt.GUI.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,14 +23,17 @@ namespace RateIt.GUI
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly MainWindowViewModel vm;
+
         public MainWindow()
         {
             InitializeComponent();
-
-
             StateManager.Load();
 
-            TestDB();
+            vm = new MainWindowViewModel(this);
+            DataContext = vm;
+
+            //TestDB();
         }
 
 
