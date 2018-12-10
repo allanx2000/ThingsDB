@@ -28,19 +28,19 @@
                 </ctrl:SmartGrid.SizeDefinitions>
 
                 <ctrl:SmartGrid.Content>
-                    <Label FontWeight="Bold" Style="{StaticResource GridField}">Category: </Label>
+                    <Label FontWeight="Bold" Style="{StaticResource GridField}">Category:</Label>
                     <ComboBox DisplayMemberPath="Name" 
                               SelectedItem="{Binding SelectedCategory}" 
                               ItemsSource="{Binding Categories.View}"/>
                     <Button Command="{Binding ManageCategoriesCommand}">...</Button>
 
-                    <Label FontWeight="Bold" Style="{StaticResource GridField}">Tags: </Label>
+                    <Label FontWeight="Bold" Style="{StaticResource GridField}">Tags:</Label>
                     <Label HorizontalAlignment="Left" Style="{StaticResource GridField}">
                         <TextBlock Text="{Binding SelectedTagsText, FallbackValue='SelectedTagsText'}"/>
                     </Label>
                     <Button Command="{Binding ManageTagsCommand}">...</Button>
 
-                    <Label FontWeight="Bold" Style="{StaticResource GridField}">Name: </Label>
+                    <Label FontWeight="Bold" Style="{StaticResource GridField}">Name:</Label>
                     <TextBox Text="{Binding SearchName}"/>
                     <CheckBox IsChecked="{Binding RatedOnly}">
                         Rated
@@ -49,34 +49,29 @@
                     <StackPanel Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Center">
                         <Button Command="{Binding SearchCommand}">Search</Button>
                     </StackPanel>
-                    
+
                 </ctrl:SmartGrid.Content>
             </ctrl:SmartGrid>
         </GroupBox>
 
         <GroupBox Grid.Row="2" Header="Items">
-        <ListBox 
+            <ListBox 
             HorizontalAlignment="Stretch"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
             ScrollViewer.VerticalScrollBarVisibility="Auto"
             SelectedValue="{Binding SelectedResultItem}" ItemsSource="{Binding Results}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel HorizontalAlignment="Stretch">
+                        <StackPanel>
                             <Label FontWeight="Bold">
                                 <TextBlock Text="{Binding Value}"/>
                             </Label>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
+                            <ctrl:SmartGrid Orientation="Horizontal">
+                                <ctrl:SmartGrid.SizeDefinitions>
+                                    <ctrl:SizeDefinition Size="Auto"/>
+                                    <ctrl:SizeDefinition Size="*"/>
+                                </ctrl:SmartGrid.SizeDefinitions>
 
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
                                 <Label Grid.ColumnSpan="2" HorizontalAlignment="Stretch">
                                     <TextBlock TextWrapping="Wrap">
                                     aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -85,18 +80,18 @@
                                     aaaaaaaa
                                     </TextBlock>
                                 </Label>
-                                
+
                                 <!--<Label Style="{StaticResource GridField}">Tags: </Label>-->
-                                
-                                <Label Grid.Row="1" Grid.ColumnSpan="2" FontStyle="Italic" HorizontalAlignment="Left">
+
+                                <Label Grid.ColumnSpan="2" FontStyle="Italic" HorizontalAlignment="Left">
                                     <TextBlock Text="{Binding TagsString}"/>
                                 </Label>
-                            </Grid>
-                            
+                            </ctrl:SmartGrid>
+
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
-        </ListBox>
+            </ListBox>
         </GroupBox>
         <Button Grid.Row="3">New Item...</Button>
     </Grid>
