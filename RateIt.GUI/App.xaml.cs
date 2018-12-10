@@ -13,5 +13,11 @@ namespace RateIt.GUI
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            if (Innouvous.Utils.SingleInstance.Checker.AlreadyRunning)
+                App.Current.Shutdown();
+        }
+
     }
 }

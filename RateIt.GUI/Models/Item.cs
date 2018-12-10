@@ -25,5 +25,10 @@ namespace RateIt.GUI.Models
         public Category Category { get; set; }
 
         public List<Tag> Tags { get; set; }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

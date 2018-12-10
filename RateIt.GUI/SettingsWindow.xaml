@@ -1,0 +1,30 @@
+﻿<Window x:Class="RateIt.GUI.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ctrl="clr-namespace:RateIt.GUI.Controls"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="Settings" Width="400" SizeToContent="Height">
+    <ctrl:SmartGrid Orientation="Horizontal">
+        <ctrl:SmartGrid.SizeDefinitions>
+            <ctrl:SizeDefinition Size="Auto"/>
+            <ctrl:SizeDefinition Size="*"/>
+        </ctrl:SmartGrid.SizeDefinitions>
+
+        <ctrl:SmartGrid.Content>
+            <Label Style="{StaticResource GridField}">DB Path:</Label>
+            <DockPanel LastChildFill="True">
+                <Button DockPanel.Dock="Right" Command="{Binding BrowsePath}">...</Button>
+                <TextBox Text="{Binding DBPath, UpdateSourceTrigger=PropertyChanged}"/>
+            </DockPanel>
+
+            <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Command="{Binding OKCommand}">OK</Button>
+                <Button Command="{Binding CancelCommand}">Cancel</Button>
+            </StackPanel>
+        </ctrl:SmartGrid.Content>
+        
+    </ctrl:SmartGrid>
+</Window>

@@ -26,13 +26,18 @@ namespace RateIt.GUI
         {
             InitializeComponent();
 
-            TestDB();
+            //TestDB();
+
+            StateManager.Load();
+
         }
+
+
 
         private void TestDB()
         {
             IDataStore ds = new SQLDataStore(@"E:\rateIt.db");
-
+            /*
             Category cat = ds.AddCategory("Movies");
 
             Tag t1 = ds.AddTag(cat.ID, "Prime");
@@ -50,6 +55,7 @@ namespace RateIt.GUI
             item2.Tags = new List<Tag>();
             item2.Tags.Add(ds.GetTag(1));
             ds.UpsertItem(item2);
+            */
 
             var items = ds.GetItemsForTag(1);
 
