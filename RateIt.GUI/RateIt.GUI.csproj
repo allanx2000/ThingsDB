@@ -64,20 +64,35 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CategoriesEditorWindow.xaml.cs">
+      <DependentUpon>CategoriesEditorWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SmartGrid.xaml.cs">
       <DependentUpon>SmartGrid.xaml</DependentUpon>
     </Compile>
     <Compile Include="Data\SearchCriteria.cs" />
+    <Compile Include="ItemEditorWindow.xaml.cs">
+      <DependentUpon>ItemEditorWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Models\DatabaseItem.cs" />
     <Compile Include="SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="StateManager.cs" />
+    <Compile Include="ViewModels\CategoriesEditorWindowViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\SettingsWindowViewModel.cs" />
+    <Page Include="CategoriesEditorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\SmartGrid.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ItemEditorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -320,18 +320,20 @@ namespace RateIt.GUI.Data
 
         private List<Item> GetItemsForCategory(Category category, string filter = null)
         {
-            string cmd = $"SELECT * from {ItemsTable} WHERE category_id = {category.ID}";
+            string cmd = $"SELECT item_id from {ItemsTable} WHERE category_id = {category.ID}";
             if (!string.IsNullOrEmpty(filter))
                 cmd += " AND item_name LIKE '%"+ SQLUtils.SQLEncode(filter) + "%'";
 
+            return GetFromItemIds(client.ExecuteSelect(cmd));
+        }
+
+        private List<Item> GetFromItemIds(DataTable itemIdsTable)
+        {
             List<Item> items = new List<Item>();
 
-            foreach (DataRow r in client.ExecuteSelect(cmd).Rows)
+            foreach (DataRow r in itemIdsTable.Rows)
             {
-                var i = ParseBasicItem(r);
-                i.Tags = GetTagsForItem(i.ID);
-
-                items.Add(i);
+                items.Add(GetItem(Convert.ToInt32(r["item_id"])));
             }
 
             return items;
@@ -339,7 +341,32 @@ namespace RateIt.GUI.Data
 
         private List<Item> GetItemsForTags(List<Tag> tags)
         {
-            throw new NotImplementedException();
+            List<Item> items = new List<Item>();
+
+            string tagIds = string.Join(",", from t in tags select t.ID);
+            string cmd = $"select distinct item_id from {ItemTagsTable} where tag_id in ({tagIds})";
+            return GetFromItemIds(client.ExecuteSelect(cmd));
+        }
+
+        public List<Category> GetAllCategoriesWithCount()
+        {
+            string cmd = $"SELECT c.*, count(*) as items" +
+                $" FROM {ItemsTable} i" +
+                $" JOIN {CategoryTable} c ON c.category_id = i.category_id" +
+                " GROUP BY i.category_id";
+
+            DataTable dt = client.ExecuteSelect(cmd);
+
+            List<Category> results = new List<Category>();
+
+            foreach (DataRow r in dt.Rows)
+            {
+                var c = ParseCategory(r);
+                c.ItemCount = Convert.ToInt32(r["items"]);
+                results.Add(c);
+            }
+
+            return results;
         }
     }
 }

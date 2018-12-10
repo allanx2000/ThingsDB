@@ -18,13 +18,14 @@ namespace RateIt.GUI.ViewModels
     class MainWindowViewModel : Innouvous.Utils.Merged45.MVVM45.ViewModel
     {
         private readonly Window window;
-
-
+        
         public MainWindowViewModel(Window window)
         {
             this.window = window;
 
             LoadWindow();
+
+            var x = StateManager.Instance.DataStore.GetAllCategoriesWithCount();
         }
 
         private List<Category> categories;

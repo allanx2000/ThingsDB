@@ -21,5 +21,6 @@ namespace RateIt.GUI.Data
         List<Category> GetAllCategories();
 
         List<Item> Search(SearchCriteria criteria);
+        List<Category> GetAllCategoriesWithCount();
     }
 }
