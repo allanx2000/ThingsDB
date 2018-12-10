@@ -25,6 +25,17 @@ namespace RateIt.GUI.Models
 
         public List<Tag> Tags { get; set; }
 
+        public string TagsString
+        {
+            get
+            {
+                if (Tags == null || Tags.Count == 0)
+                    return null;
+
+                return string.Join(", ", from t in Tags orderby t.Name ascending select t.Name);
+            }
+        }
+
         public override string Value => Name;
 
     }
