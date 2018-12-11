@@ -57,6 +57,17 @@ namespace RateIt.GUI.ViewModels
         }
 
 
+        public SearchCriteria CurrentQuery
+        {
+            get { return Get<SearchCriteria>(); }
+            private set
+            {
+                Set(value);
+                RaisePropertyChanged();
+            }
+        }
+
+
         private List<Tag> selectedTags;
 
         public string SelectedTagsText
@@ -167,14 +178,15 @@ namespace RateIt.GUI.ViewModels
         {
             get { return new CommandHelper(Search); }
         }
-
+        
         private void Search()
         {
             try
             {
                 SearchCriteria sc = new SearchCriteria(SelectedCategory, selectedTags, SearchName, RatedOnly);
-
                 Results = StateManager.Instance.DataStore.Search(sc);
+
+                CurrentQuery = sc;
             }
             catch (Exception e)
             {

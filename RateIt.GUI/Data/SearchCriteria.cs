@@ -25,5 +25,23 @@ namespace RateIt.GUI.Data
             RatedOnly = ratedOnly;
             UntaggedOnly = untaggedOnly;
         }
+
+        public override string ToString()
+        {
+            List<string> parts = new List<string>();
+
+            parts.Add("Category: " + CategoryValue.Name);
+
+            if (!string.IsNullOrEmpty(Filter))
+                parts.Add("Filter: " + Filter);
+
+            if (HasTags)
+                parts.Add("Tags: " + string.Join(", ", Tags));
+
+            if (RatedOnly)
+                parts.Add("Rated Only");
+
+            return string.Join("; ", parts);
+        }
     }
 }

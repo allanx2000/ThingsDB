@@ -50,6 +50,10 @@
                         <Button Command="{Binding SearchCommand}">Search</Button>
                     </StackPanel>
 
+                    <Label Grid.ColumnSpan="3">
+                        <TextBlock Text="{Binding CurrentQuery}"/>
+                    </Label>
+                    
                 </ctrl:SmartGrid.Content>
             </ctrl:SmartGrid>
         </GroupBox>
