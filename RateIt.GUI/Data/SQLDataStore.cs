@@ -350,10 +350,8 @@ namespace RateIt.GUI.Data
 
         public List<Category> GetAllCategoriesWithCount()
         {
-            string cmd = $"SELECT c.*, count(*) as items" +
-                $" FROM {ItemsTable} i" +
-                $" JOIN {CategoryTable} c ON c.category_id = i.category_id" +
-                " GROUP BY i.category_id" +
+            string cmd = $"SELECT c.*, (SELECT count(*) from {ItemsTable} i where i.category_id = c.category_id) as items" +
+                $" FROM {CategoryTable} c" +
                 " ORDER BY items DESC";
 
             DataTable dt = client.ExecuteSelect(cmd);
@@ -368,6 +366,20 @@ namespace RateIt.GUI.Data
             }
 
             return results;
+        }
+
+        public void DeleteCategory(int id)
+        {
+            client.ExecuteNonQuery($"delete from {CategoryTable} where category_id={id}");
+        }
+
+        public void UpdateCategory(Category category)
+        {
+            string cmd = $"UPDATE {CategoryTable}" +
+                $" SET category_name='{SQLUtils.SQLEncode(category.Name)}'" +
+                $" WHERE category_id={category.ID}";
+
+            client.ExecuteNonQuery(cmd);
         }
     }
 }

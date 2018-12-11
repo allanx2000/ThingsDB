@@ -22,5 +22,7 @@ namespace RateIt.GUI.Data
 
         List<Item> Search(SearchCriteria criteria);
         List<Category> GetAllCategoriesWithCount();
+        void DeleteCategory(int id);
+        void UpdateCategory(Category category);
     }
 }

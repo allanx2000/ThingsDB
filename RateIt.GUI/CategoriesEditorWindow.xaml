@@ -3,16 +3,39 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:RateIt.GUI"
+        xmlns:ctrl="clr-namespace:RateIt.GUI.Controls"
         mc:Ignorable="d"
-        Title="Categories Editor" Height="450" Width="500">
+        Title="Categories Editor" Height="450" Width="500" WindowStartupLocation="CenterScreen">
     <DockPanel LastChildFill="True">
 
-        <StackPanel DockPanel.Dock="Right">
-            <Button>Add...</Button>
-            <Button>Rename</Button>
-            <Button>Delete</Button>
-        </StackPanel>
+        <GroupBox DockPanel.Dock="Bottom" Header="Details">
+            <ctrl:SmartGrid Orientation="Horizontal">
+                <ctrl:SmartGrid.SizeDefinitions>
+                    <ctrl:SizeDefinition Size="Auto"/>
+                    <ctrl:SizeDefinition Size="*"/>
+                </ctrl:SmartGrid.SizeDefinitions>
+
+                <Label Style="{StaticResource GridField}">ID: </Label>
+                <Label Content="{Binding SelectedCategory.ID}"/>
+
+                <Label Style="{StaticResource GridField}">Name: </Label>
+                <TextBox Text="{Binding CategoryName}"/>
+
+                <Grid Grid.ColumnSpan="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>                   
+                    
+                    <Button HorizontalAlignment="Left" Command="{Binding NewCommand}">New...</Button>
+                    <Button Grid.Column="1" HorizontalAlignment="Center" Command="{Binding SaveCommand}">Save</Button>
+                    <Button Grid.Column="2" HorizontalAlignment="Right" IsEnabled="{Binding CanDelete}" Command="{Binding DeleteCommand}">Delete</Button>
+
+                </Grid>
+
+            </ctrl:SmartGrid>
+        </GroupBox> 
         
         <DataGrid ItemsSource="{Binding Categories}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedCategory}">
             <DataGrid.Columns>
