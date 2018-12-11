@@ -19,6 +19,7 @@ namespace RateIt.GUI.ViewModels
         }
 
         public List<Category> Categories { get; private set; }
+        public bool Changed { get; private set; }
 
         private void LoadWindow()
         {

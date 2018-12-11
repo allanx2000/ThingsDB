@@ -24,8 +24,6 @@ namespace RateIt.GUI.ViewModels
             this.window = window;
 
             LoadWindow();
-
-            var x = StateManager.Instance.DataStore.GetAllCategoriesWithCount();
         }
 
         private List<Category> categories;
@@ -149,6 +147,20 @@ namespace RateIt.GUI.ViewModels
             {
                 MessageBoxFactory.ShowError(e);
             }
+        }
+
+        
+        public ICommand ManageCategoriesCommand
+        {
+            get { return new CommandHelper(() =>
+            {
+                CategoriesEditorWindow ce = new CategoriesEditorWindow();
+                ce.Owner = window;
+                ce.ShowDialog();
+
+                if (ce.Changed)
+                    LoadWindow();
+            }); }
         }
 
         public ICommand SearchCommand

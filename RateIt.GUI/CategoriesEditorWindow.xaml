@@ -14,11 +14,11 @@
             <Button>Delete</Button>
         </StackPanel>
         
-        <DataGrid ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedCategory}">
+        <DataGrid ItemsSource="{Binding Categories}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedCategory}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID"/>
-                <DataGridTextColumn Header="Name"/>
-                <DataGridTextColumn Header="Items"/>
+                <DataGridTextColumn Header="ID" Binding="{Binding ID}"/>
+                <DataGridTextColumn Header="Name" Width="*" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Items" Width="*" Binding="{Binding ItemCount}"/>
             </DataGrid.Columns>
         </DataGrid>
     </DockPanel>

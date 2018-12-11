@@ -353,7 +353,8 @@ namespace RateIt.GUI.Data
             string cmd = $"SELECT c.*, count(*) as items" +
                 $" FROM {ItemsTable} i" +
                 $" JOIN {CategoryTable} c ON c.category_id = i.category_id" +
-                " GROUP BY i.category_id";
+                " GROUP BY i.category_id" +
+                " ORDER BY items DESC";
 
             DataTable dt = client.ExecuteSelect(cmd);
 
