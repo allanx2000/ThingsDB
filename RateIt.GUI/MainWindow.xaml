@@ -16,7 +16,7 @@
         </Grid.RowDefinitions>
 
         <Menu Grid.Row="0">
-            <MenuItem Header="Settings"/>
+            <MenuItem Command="{Binding EditSettingsCommand}" Header="Settings"/>
         </Menu>
 
         <GroupBox Grid.Row="1" Header="Search">

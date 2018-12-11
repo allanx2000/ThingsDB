@@ -42,6 +42,8 @@ namespace RateIt.GUI.ViewModels
             get { return new CommandHelper(() => window.Close()); }
         }
 
+        public bool Changed { get; private set; }
+
         private void SetSettings()
         {
             try
@@ -58,6 +60,7 @@ namespace RateIt.GUI.ViewModels
                 StateManager.Settings.DBPath = DBPath;
                 StateManager.Settings.Save();
 
+                Changed = true;
                 window.Close();
             }
             catch (Exception e)

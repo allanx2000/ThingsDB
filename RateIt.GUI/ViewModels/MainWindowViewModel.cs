@@ -174,6 +174,25 @@ namespace RateIt.GUI.ViewModels
             }); }
         }
 
+        public ICommand EditSettingsCommand
+        {
+            get
+            {
+                return new CommandHelper(() =>
+                {
+                    SettingsWindow sw = new SettingsWindow();
+                    sw.Owner = window;
+                    sw.ShowDialog();
+
+                    if (sw.Changed)
+                    {
+                        StateManager.Load();
+                        LoadWindow();
+                    }
+                });
+            }
+        }
+
         public ICommand SearchCommand
         {
             get { return new CommandHelper(Search); }

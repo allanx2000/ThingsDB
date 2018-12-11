@@ -29,5 +29,7 @@ namespace RateIt.GUI
             vm = new SettingsWindowViewModel(this);
             DataContext = vm;
         }
+
+        public bool Changed { get { return vm.Changed; } }
     }
 }
