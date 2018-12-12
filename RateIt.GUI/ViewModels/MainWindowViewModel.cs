@@ -174,6 +174,23 @@ namespace RateIt.GUI.ViewModels
             }); }
         }
 
+
+        public ICommand ManageTagsCommand
+        {
+            get
+            {
+                return new CommandHelper(() =>
+                {
+                    TagsEditorWindow te = new TagsEditorWindow();
+                    te.Owner = window;
+                    te.ShowDialog();
+
+                    if (te.Changed)
+                        LoadWindow();
+                });
+            }
+        }
+
         public ICommand EditSettingsCommand
         {
             get

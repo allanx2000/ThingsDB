@@ -24,5 +24,8 @@ namespace RateIt.GUI.Data
         List<Category> GetAllCategoriesWithCount();
         void DeleteCategory(int id);
         void UpdateCategory(Category category);
+        void DeleteTag(int id);
+        void UpdateTag(Tag selectedTag);
+        List<Tag> GetAllTagsWithCount(int categoryId);
     }
 }

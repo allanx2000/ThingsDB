@@ -17,5 +17,8 @@ namespace RateIt.GUI.Models
         public string Name { get; set; }
 
         public override string Value => Name;
+
+        //Only used for *Manager
+        public int ItemCount { get; set; }
     }
 }

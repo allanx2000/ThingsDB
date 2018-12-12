@@ -64,6 +64,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="TagsEditorWindow.xaml.cs">
+      <DependentUpon>TagsEditorWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CategoriesEditorWindow.xaml.cs">
       <DependentUpon>CategoriesEditorWindow.xaml</DependentUpon>
     </Compile>
@@ -79,9 +82,14 @@
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="StateManager.cs" />
+    <Compile Include="ViewModels\TagsEditorWindowViewModel.cs" />
     <Compile Include="ViewModels\CategoriesEditorWindowViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\SettingsWindowViewModel.cs" />
+    <Page Include="TagsEditorWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="CategoriesEditorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

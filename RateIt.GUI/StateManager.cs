@@ -5,36 +5,35 @@ using RateIt.GUI.Properties;
 
 namespace RateIt.GUI
 {
+
     internal class StateManager
     {
-        private static StateManager instance;
-        private static Settings settings;
 
         /// <summary>
         /// Loads a DB set in Settings
         /// </summary>
         internal static void Load()
         {
-            settings = Settings.Default;
+            Settings = Settings.Default;
 
-            while (string.IsNullOrEmpty(settings.DBPath))
+            while (string.IsNullOrEmpty(Settings.DBPath))
             {
                 var dlg = new SettingsWindow();
                 dlg.ShowDialog();
             }
 
-            instance = new StateManager();
+            Instance = new StateManager();
         }
 
-        public static StateManager Instance { get { return instance; } }
-        public static Settings Settings { get { return settings; } }
+        public static StateManager Instance { get; private set; }
+        public static Settings Settings { get; private set; }
 
 
         public IDataStore DataStore { get; private set; }
 
         private StateManager()
         {
-            DataStore = new SQLDataStore(settings.DBPath);
+            DataStore = new SQLDataStore(Settings.DBPath);
         }
     }
 }

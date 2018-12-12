@@ -370,6 +370,11 @@ namespace RateIt.GUI.Data
 
         public void DeleteCategory(int id)
         {
+            var count = client.ExecuteScalar($"select count(*) from {ItemsTable} where category_id={id}");
+
+            if (Convert.ToInt32(count) > 0)
+                throw new Exception("Cannot delete category with items in it.");
+
             client.ExecuteNonQuery($"delete from {CategoryTable} where category_id={id}");
         }
 
@@ -380,6 +385,41 @@ namespace RateIt.GUI.Data
                 $" WHERE category_id={category.ID}";
 
             client.ExecuteNonQuery(cmd);
+        }
+
+        public void DeleteTag(int id)
+        {
+            client.ExecuteNonQuery($"delete from {TagsTable} where tag_id={id}");
+        }
+
+        public void UpdateTag(Tag tag)
+        {
+            string cmd = $"UPDATE {TagsTable}" +
+                $" SET tag_name='{SQLUtils.SQLEncode(tag.Name)}'" +
+                $" WHERE tag_id={tag.ID}";
+
+            client.ExecuteNonQuery(cmd);
+        }
+
+        public List<Tag> GetAllTagsWithCount(int categoryId)
+        {
+
+            string cmd = $"SELECT t.*, (SELECT count(*) from {ItemTagsTable} it where it.tag_id = t.tag_id) as items" +
+                $" FROM {TagsTable} t WHERE t.category_id = {categoryId}" +
+                " ORDER BY items DESC";
+
+            DataTable dt = client.ExecuteSelect(cmd);
+
+            List<Tag> results = new List<Tag>();
+
+            foreach (DataRow r in dt.Rows)
+            {
+                var tag = ParseTag(r);
+                tag.ItemCount = Convert.ToInt32(r["items"]);
+                results.Add(tag);
+            }
+
+            return results;
         }
     }
 }

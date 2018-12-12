@@ -17,6 +17,10 @@
 
         <Menu Grid.Row="0">
             <MenuItem Command="{Binding EditSettingsCommand}" Header="Settings"/>
+            <MenuItem Header="Manage">
+                <MenuItem Command="{Binding ManageCategoriesCommand}" Header="Categories"/>
+                <MenuItem Command="{Binding ManageTagsCommand}" Header="Tags"/>
+            </MenuItem>
         </Menu>
 
         <GroupBox Grid.Row="1" Header="Search">
@@ -29,16 +33,16 @@
 
                 <ctrl:SmartGrid.Content>
                     <Label FontWeight="Bold" Style="{StaticResource GridField}">Category:</Label>
-                    <ComboBox DisplayMemberPath="Name" 
+                    <ComboBox Grid.ColumnSpan="2"
+                              DisplayMemberPath="Name" 
                               SelectedItem="{Binding SelectedCategory}" 
                               ItemsSource="{Binding Categories.View}"/>
-                    <Button Command="{Binding ManageCategoriesCommand}">...</Button>
-
+                    
                     <Label FontWeight="Bold" Style="{StaticResource GridField}">Tags:</Label>
                     <Label HorizontalAlignment="Left" Style="{StaticResource GridField}">
                         <TextBlock Text="{Binding SelectedTagsText, FallbackValue='SelectedTagsText'}"/>
                     </Label>
-                    <Button Command="{Binding ManageTagsCommand}">...</Button>
+                    <Button Command="{Binding SelectTagsCommand}">...</Button>
 
                     <Label FontWeight="Bold" Style="{StaticResource GridField}">Name:</Label>
                     <TextBox Text="{Binding SearchName}"/>
