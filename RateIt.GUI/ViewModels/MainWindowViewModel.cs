@@ -48,6 +48,15 @@ namespace RateIt.GUI.ViewModels
             }
         }
 
+        public Item SelectedResultItem {
+            get { return Get<Item>(); }
+            set
+            {
+                Set(value);
+                RaisePropertyChanged();
+            }
+        }
+
         public List<Item> Results
         {
             get { return Get<List<Item>>(); }
@@ -223,6 +232,7 @@ namespace RateIt.GUI.ViewModels
                 Results = StateManager.Instance.DataStore.Search(sc);
 
                 CurrentQuery = sc;
+                SelectedResultItem = null;
             }
             catch (Exception e)
             {
@@ -234,6 +244,20 @@ namespace RateIt.GUI.ViewModels
         {
             get { return new CommandHelper(() => EditItem()); }
         }
+
+        public ICommand EditItemCommand
+        {
+            get
+            {
+                return new CommandHelper(() =>
+                {
+                    if (SelectedResultItem != null)
+                        EditItem(SelectedResultItem);
+                });
+            }
+        }
+
+
 
         private void EditItem(Item existing = null)
         {

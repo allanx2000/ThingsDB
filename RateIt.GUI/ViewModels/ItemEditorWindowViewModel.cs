@@ -50,6 +50,7 @@ namespace RateIt.GUI.ViewModels
                 SelectedCategory = existing.Category;
                 SetSelectedTags(existing.Tags);
                 Name = existing.Name;
+                ID = existing.ID;
 
                 /**
                  * TODO: Ratings, Url, Attribes
@@ -85,7 +86,7 @@ namespace RateIt.GUI.ViewModels
             }
         }
 
-        
+        public int ID { get; private set; }
 
         public ICommand CancelCommand
         {

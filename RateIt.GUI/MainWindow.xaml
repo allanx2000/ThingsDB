@@ -67,7 +67,14 @@
             HorizontalAlignment="Stretch"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
             ScrollViewer.VerticalScrollBarVisibility="Auto"
-            SelectedValue="{Binding SelectedResultItem}" ItemsSource="{Binding Results}">
+            SelectedItem="{Binding SelectedResultItem}" ItemsSource="{Binding Results}">
+                <ListBox.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Command="{Binding EditItemCommand}" Header="Edit.."/>
+                        <Separator/>
+                        <MenuItem Header="Delete"/>
+                    </ContextMenu>
+                </ListBox.ContextMenu>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>

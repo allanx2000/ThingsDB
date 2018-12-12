@@ -19,7 +19,7 @@
             </ctrl:SmartGrid.SizeDefinitions>
 
             <Label Style="{StaticResource GridField}">ID: </Label>
-            <Label Content="{Binding SelectedTag.ID}"/>
+            <Label Content="{Binding ID}"/>
 
             <Label Style="{StaticResource GridField}">Category: </Label>
             <ComboBox HorizontalAlignment="Left" Width="200" 

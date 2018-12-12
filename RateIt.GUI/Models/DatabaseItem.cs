@@ -15,5 +15,16 @@ namespace RateIt.GUI.Models
         {
             return GetType().Name + ": " + ID + ", " + Value;
         }
+
+        public override bool Equals(object obj)
+        {
+            DatabaseItem other = obj as DatabaseItem;
+
+            if (other == null || obj.GetType() != GetType())
+                return false;
+            else
+                return other.ID == this.ID;
+            
+        }
     }
 }

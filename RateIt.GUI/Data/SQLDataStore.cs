@@ -149,17 +149,19 @@ namespace RateIt.GUI.Data
                         item.Category.ID
                         );
 
-                    client.ExecuteScalar(cmd);
+                    client.ExecuteNonQuery(cmd);
                     item.ID = SQLUtils.GetLastInsertRow(client);
                 }
                 else
                 {
-                    cmd = string.Format("update {0} set name='{1}', category_id={2} where id = {3}",
+                    cmd = string.Format("update {0} set item_name='{1}', category_id={2} where item_id = {3}",
                         ItemsTable,
                         SQLUtils.SQLEncode(item.Name),
                         item.Category.ID,
                         item.ID
                         );
+
+                    client.ExecuteNonQuery(cmd);
                 }
 
                 //Upsert Tags
