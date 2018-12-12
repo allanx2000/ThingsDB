@@ -18,7 +18,7 @@ namespace RateIt.GUI.ViewModels
     class MainWindowViewModel : Innouvous.Utils.Merged45.MVVM45.ViewModel
     {
         private readonly Window window;
-        
+
         public MainWindowViewModel(Window window)
         {
             this.window = window;
@@ -41,13 +41,15 @@ namespace RateIt.GUI.ViewModels
         public CollectionViewSource Categories
         {
             get { return Get<CollectionViewSource>(); }
-            private set {
+            private set
+            {
                 Set(value);
                 RaisePropertyChanged();
             }
         }
 
-        public List<Item> Results {
+        public List<Item> Results
+        {
             get { return Get<List<Item>>(); }
             private set
             {
@@ -155,18 +157,21 @@ namespace RateIt.GUI.ViewModels
             }
         }
 
-        
+
         public ICommand ManageCategoriesCommand
         {
-            get { return new CommandHelper(() =>
+            get
             {
-                CategoriesEditorWindow ce = new CategoriesEditorWindow();
-                ce.Owner = window;
-                ce.ShowDialog();
+                return new CommandHelper(() =>
+          {
+              CategoriesEditorWindow ce = new CategoriesEditorWindow();
+              ce.Owner = window;
+              ce.ShowDialog();
 
-                if (ce.Changed)
-                    LoadWindow();
-            }); }
+              if (ce.Changed)
+                  LoadWindow();
+          });
+            }
         }
 
 
@@ -209,7 +214,7 @@ namespace RateIt.GUI.ViewModels
         {
             get { return new CommandHelper(Search); }
         }
-        
+
         private void Search()
         {
             try
@@ -223,6 +228,21 @@ namespace RateIt.GUI.ViewModels
             {
                 MessageBoxFactory.ShowError(e);
             }
+        }
+
+        public ICommand NewItemCommand
+        {
+            get { return new CommandHelper(() => EditItem()); }
+        }
+
+        private void EditItem(Item existing = null)
+        {
+            ItemEditorWindow editor = new ItemEditorWindow(existing);
+            editor.Owner = window;
+            editor.ShowDialog();
+
+            if (CurrentQuery != null)
+                Search();
         }
     }
 }

@@ -161,9 +161,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Resource Include="TableScripts\CreateItemAttributesTable.txt">
+    <Content Include="TableScripts\CreateItemAttributesTable.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+    </Content>
     <Content Include="TableScripts\SelectItem.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

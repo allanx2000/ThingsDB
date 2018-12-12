@@ -9,10 +9,10 @@ namespace RateIt.GUI
 {
     class Utils
     {
-        internal static string TagsListToString(List<Tag> tags)
+        internal static string TagsListToString(List<Tag> tags, string nullValue = "(All)")
         {
             if (tags == null || tags.Count == 0)
-                return "(All)";
+                return nullValue;
             else
                 return string.Join(", ", from x in tags
                                          orderby x.Name ascending

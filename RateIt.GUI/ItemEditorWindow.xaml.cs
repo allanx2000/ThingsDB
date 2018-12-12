@@ -28,6 +28,7 @@ namespace RateIt.GUI
             InitializeComponent();
 
             this.vm = new ItemEditorWindowViewModel(this, i);
+            DataContext = vm;
         }
     }
 }

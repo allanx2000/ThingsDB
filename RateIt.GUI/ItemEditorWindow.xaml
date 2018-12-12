@@ -3,10 +3,47 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:RateIt.GUI"
         mc:Ignorable="d"
-        Title="ItemEditorWindow" Height="450" Width="800">
+       xmlns:ctrl="clr-namespace:RateIt.GUI.Controls"
+        Title="Item Editor" Height="450" Width="500" WindowStartupLocation="CenterScreen">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <ctrl:SmartGrid Orientation="Horizontal">
+            <ctrl:SmartGrid.SizeDefinitions>
+                <ctrl:SizeDefinition Size="Auto"/>
+                <ctrl:SizeDefinition Size="*"/>
+            </ctrl:SmartGrid.SizeDefinitions>
+
+            <Label Style="{StaticResource GridField}">ID: </Label>
+            <Label Content="{Binding SelectedTag.ID}"/>
+
+            <Label Style="{StaticResource GridField}">Category: </Label>
+            <ComboBox HorizontalAlignment="Left" Width="200" 
+                      DisplayMemberPath="Name"
+                      ItemsSource="{Binding Categories}" 
+                      SelectedItem="{Binding SelectedCategory}"/>
+
+            <Label Style="{StaticResource GridField}">Name: </Label>
+            <TextBox Text="{Binding Name}"/>
+
+            <Label  Style="{StaticResource GridField}">Tags: </Label>
+            <DockPanel LastChildFill="True">
+
+                <Button DockPanel.Dock="Right">Change...</Button>
+                
+                <Label>
+                    <TextBlock Text="{Binding SelectedTagsText}"/>
+                </Label>
+            </DockPanel>
+        </ctrl:SmartGrid>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Command="{Binding SaveCommand}">Save</Button>
+            <Button Command="{Binding CancelCommand}">Cancel</Button>
+        </StackPanel>
     </Grid>
 </Window>

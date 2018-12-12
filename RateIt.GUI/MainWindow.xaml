@@ -101,6 +101,6 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </GroupBox>
-        <Button Grid.Row="3">New Item...</Button>
+        <Button Grid.Row="3" Command="{Binding NewItemCommand}">New Item...</Button>
     </Grid>
 </Window>

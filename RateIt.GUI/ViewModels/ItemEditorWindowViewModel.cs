@@ -38,7 +38,7 @@ namespace RateIt.GUI.ViewModels
 
         public string SelectedTagsText
         {
-            get { return Utils.TagsListToString(selectedTags); }
+            get { return Utils.TagsListToString(selectedTags, ""); }
         }
 
         private void LoadWindow()
@@ -85,6 +85,16 @@ namespace RateIt.GUI.ViewModels
             }
         }
 
+        
+
+        public ICommand CancelCommand
+        {
+            get
+            {
+                return new CommandHelper(() => window.Close());
+            }
+        }
+
         public ICommand SaveCommand
         {
             get
@@ -99,6 +109,11 @@ namespace RateIt.GUI.ViewModels
             {
                 if (existing == null)
                 {
+                    if (SelectedCategory == null || string.IsNullOrEmpty(Name))
+                    {
+                        throw new Exception("Category and Name are required.");
+                    }
+
                     Item x = new Item(SelectedCategory, Name);
                     x.Tags = selectedTags;
 
