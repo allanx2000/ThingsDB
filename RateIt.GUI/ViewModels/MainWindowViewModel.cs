@@ -74,12 +74,7 @@ namespace RateIt.GUI.ViewModels
         {
             get
             {
-                if (selectedTags == null || selectedTags.Count == 0)
-                    return "(All)";
-                else
-                    return string.Join(", ", from x in selectedTags
-                                             orderby x.Name ascending
-                                             select x.Name);
+                return Utils.TagsListToString(selectedTags);
             }
         }
 

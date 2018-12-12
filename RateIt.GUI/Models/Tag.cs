@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RateIt.GUI.Models
 {
-    class Tag : DatabaseItem
+    public class Tag : DatabaseItem
     {
         public Tag(int id, string name)
         {

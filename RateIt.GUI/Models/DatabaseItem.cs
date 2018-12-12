@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RateIt.GUI.Models
 {
-    abstract class DatabaseItem
+    public abstract class DatabaseItem
     {
         public int ID { get; set; }
         public abstract string Value { get; }

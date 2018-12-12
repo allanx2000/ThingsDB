@@ -31,6 +31,7 @@ namespace RateIt.GUI.Data
         private const string CategoryTable = "tbl_categories";
         private const string TagsTable = "tbl_tags";
         private const string ItemTagsTable = "tbl_item_tags";
+        private const string ItemAttributesTable = "tbl_item_attrs";
 
         private const string ScriptsPath = "TableScripts";
         private const string ScriptsFormat = "txt";
@@ -64,6 +65,18 @@ namespace RateIt.GUI.Data
             {
                 CreateItemTagsTable();
             }
+
+            if (!SQLUtils.CheckTableExists(ItemAttributesTable, client))
+            {
+                CreateItemAttributesTable();
+            }
+        }
+
+
+        private void CreateItemAttributesTable()
+        {
+            string cmd = LoadFromText("CreateItemAttributesTable", ItemAttributesTable, ItemsTable);
+            client.ExecuteNonQuery(cmd);
         }
 
         private void CreateItemTagsTable()

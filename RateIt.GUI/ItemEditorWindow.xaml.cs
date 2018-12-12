@@ -1,4 +1,6 @@
-﻿using System;
+﻿using RateIt.GUI.Models;
+using RateIt.GUI.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,13 @@ namespace RateIt.GUI
     /// </summary>
     public partial class ItemEditorWindow : Window
     {
-        public ItemEditorWindow()
+        private ItemEditorWindowViewModel vm;
+
+        public ItemEditorWindow(Item i = null)
         {
             InitializeComponent();
+
+            this.vm = new ItemEditorWindowViewModel(this, i);
         }
     }
 }

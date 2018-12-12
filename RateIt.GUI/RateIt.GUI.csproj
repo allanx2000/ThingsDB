@@ -64,6 +64,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\AttributeType.cs" />
     <Compile Include="TagsEditorWindow.xaml.cs">
       <DependentUpon>TagsEditorWindow.xaml</DependentUpon>
     </Compile>
@@ -82,6 +83,8 @@
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="StateManager.cs" />
+    <Compile Include="Utils.cs" />
+    <Compile Include="ViewModels\ItemEditorWindowViewModel.cs" />
     <Compile Include="ViewModels\TagsEditorWindowViewModel.cs" />
     <Compile Include="ViewModels\CategoriesEditorWindowViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
@@ -158,6 +161,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Resource Include="TableScripts\CreateItemAttributesTable.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Content Include="TableScripts\SelectItem.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
