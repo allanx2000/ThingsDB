@@ -33,20 +33,22 @@
             </Grid.RowDefinitions>
 
             <Label Grid.Row="0" Grid.Column="0">Unselected:</Label>
-            <ListBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding UnselectedTags.View}" SelectedItem="{Binding UnselectedTag}" DisplayMemberPath="Name"/>
+            <ListBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding UnselectedTags.View}" 
+                     SelectedItem="{Binding UnselectedTag}" DisplayMemberPath="Name"/>
 
             <StackPanel VerticalAlignment="Center" Grid.Row="1" Grid.Column="1">
-                <Button FontSize="15">&gt;</Button>
-                <Button FontSize="15">&lt;</Button>
+                <Button FontSize="15" Command="{Binding SelectCommand}">&gt;</Button>
+                <Button FontSize="15" Command="{Binding UnselectCommand}">&lt;</Button>
             </StackPanel>
 
             <Label Grid.Row="0" Grid.Column="2">Selected:</Label>
-            <ListBox Grid.Row="1" Grid.Column="2" ItemsSource="{Binding SelectedTags.View}" SelectedItem="{Binding SelectedTag}" DisplayMemberPath="Name"/>
+            <ListBox Grid.Row="1" Grid.Column="2" ItemsSource="{Binding SelectedTags.View}" 
+                     SelectedItem="{Binding SelectedTag}" DisplayMemberPath="Name"/>
 
         </Grid>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Command="{Binding SaveCommand}">Save</Button>
+            <Button Command="{Binding OKCommand}">Set</Button>
             <Button Command="{Binding CancelCommand}">Cancel</Button>
         </StackPanel>
     </Grid>

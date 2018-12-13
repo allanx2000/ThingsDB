@@ -33,17 +33,21 @@
 
                 <ctrl:SmartGrid.Content>
                     <Label FontWeight="Bold" Style="{StaticResource GridField}">Category:</Label>
-                    <ComboBox Grid.ColumnSpan="2"
+                    <ComboBox
                               DisplayMemberPath="Name" 
                               SelectedItem="{Binding SelectedCategory}" 
                               ItemsSource="{Binding Categories.View}"/>
-                    
+                    <Label/>
+
                     <Label FontWeight="Bold" Style="{StaticResource GridField}">Tags:</Label>
                     <Label HorizontalAlignment="Left" Style="{StaticResource GridField}">
                         <TextBlock Text="{Binding SelectedTagsText, FallbackValue='SelectedTagsText'}"/>
                     </Label>
-                    <Button Command="{Binding SelectTagsCommand}">...</Button>
-
+                    <StackPanel Orientation="Horizontal">
+                        <Button Command="{Binding SelectTagsCommand}">...</Button>
+                        <Button Command="{Binding ClearTagsCommand}">Clear</Button>
+                    </StackPanel>
+                    
                     <Label FontWeight="Bold" Style="{StaticResource GridField}">Name:</Label>
                     <TextBox Text="{Binding SearchName}"/>
                     <CheckBox IsChecked="{Binding RatedOnly}">

@@ -40,7 +40,7 @@ namespace RateIt.GUI.ViewModels
             SelectedTags.SortDescriptions.Add(sd);
 
             UnselectedTags = new CollectionViewSource();
-            UnselectedTags.Source = selectedTags;
+            UnselectedTags.Source = unselectedTags;
             UnselectedTags.SortDescriptions.Add(sd);
 
             if (tags != null)
@@ -108,6 +108,38 @@ namespace RateIt.GUI.ViewModels
             {
                 Set(value);
                 RaisePropertyChanged();
+            }
+        }
+
+        public ICommand SelectCommand
+        {
+            get
+            {
+                return new CommandHelper(() =>
+                {
+                    if (UnselectedTag != null)
+                    {
+                        selectedTags.Add(UnselectedTag);
+                        unselectedTags.Remove(UnselectedTag);
+                        UnselectedTag = null;
+                    }
+                });
+            }
+        }
+
+        public ICommand UnselectCommand
+        {
+            get
+            {
+                return new CommandHelper(() =>
+                {
+                    if (SelectedTag != null)
+                    {
+                        unselectedTags.Add(SelectedTag);
+                        selectedTags.Remove(SelectedTag);
+                        SelectedTag = null;
+                    }
+                });
             }
         }
 

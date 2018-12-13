@@ -238,6 +238,17 @@ namespace RateIt.GUI.ViewModels
             }
         }
 
+        public ICommand ClearTagsCommand
+        {
+            get
+            {
+                return new CommandHelper(() =>
+                {
+                    selectedTags = null;
+                    RaisePropertyChanged("SelectedTagsText");
+                });
+            }
+        }
 
         public ICommand SearchCommand
         {
