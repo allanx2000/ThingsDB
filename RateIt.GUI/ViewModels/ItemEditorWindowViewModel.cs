@@ -101,6 +101,38 @@ namespace RateIt.GUI.ViewModels
             }
         }
 
+        public ICommand SelectTagsCommand
+        {
+            get
+            {
+                return new CommandHelper(() =>
+                {
+                    TagsSelectorWindow selector = new TagsSelectorWindow(SelectedCategory, selectedTags);
+                    selector.Owner = window;
+                    selector.ShowDialog();
+
+                    if (selector.Changed)
+                    {
+                        selectedTags = selector.GetSelectedTags();
+                        RaisePropertyChanged("SelectedTagsText");
+                    }
+                });
+            }
+        }
+
+        public ICommand ClearTagsCommand
+        {
+            get
+            {
+                return new CommandHelper(() =>
+                {
+                    selectedTags = null;
+                    RaisePropertyChanged("SelectedTagsText");
+                });
+            }
+        }
+
+
         public ICommand SaveCommand
         {
             get

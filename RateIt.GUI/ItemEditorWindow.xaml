@@ -33,7 +33,7 @@
             <Label  Style="{StaticResource GridField}">Tags: </Label>
             <DockPanel LastChildFill="True">
 
-                <Button DockPanel.Dock="Right">Change...</Button>
+                <Button DockPanel.Dock="Right" Command="{Binding SelectTagsCommand}" >Change...</Button>
                 
                 <Label>
                     <TextBlock Text="{Binding SelectedTagsText}"/>
