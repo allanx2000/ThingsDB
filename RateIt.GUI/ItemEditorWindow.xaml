@@ -5,41 +5,66 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
        xmlns:ctrl="clr-namespace:RateIt.GUI.Controls"
-        Title="{Binding Title, FallbackValue='Item Editor'}" Height="450" Width="500" WindowStartupLocation="CenterScreen">
+        Title="{Binding Title, FallbackValue='Item Editor'}" Width="500" 
+        WindowStartupLocation="CenterScreen" SizeToContent="Height">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <ctrl:SmartGrid Orientation="Horizontal">
-            <ctrl:SmartGrid.SizeDefinitions>
-                <ctrl:SizeDefinition Size="Auto"/>
-                <ctrl:SizeDefinition Size="*"/>
-            </ctrl:SmartGrid.SizeDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-            <Label Style="{StaticResource GridField}">ID: </Label>
-            <Label Content="{Binding ID}"/>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource GridField}">ID: </Label>
+            <Label Grid.Row="0" Grid.Column="1" Content="{Binding ID}"/>
 
-            <Label Style="{StaticResource GridField}">Category: </Label>
-            <ComboBox HorizontalAlignment="Left" Width="200" 
-                      DisplayMemberPath="Name"
+            <Label Grid.Row="1" Grid.Column="0" Style="{StaticResource GridField}">Category: </Label>
+            <ComboBox Grid.Row="1" Grid.Column="1" DisplayMemberPath="Name"
                       ItemsSource="{Binding Categories}" 
                       SelectedItem="{Binding SelectedCategory}"/>
 
-            <Label Style="{StaticResource GridField}">Name: </Label>
-            <TextBox Text="{Binding Name}"/>
+            <Label Grid.Row="2" Grid.Column="0" Style="{StaticResource GridField}">Name: </Label>
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Name}"/>
 
-            <Label  Style="{StaticResource GridField}">Tags: </Label>
-            <DockPanel LastChildFill="True">
+            <Label Grid.Row="3" Grid.Column="0" Style="{StaticResource GridField}">URL:</Label>
+            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding URL}"/>
 
+            <Label Grid.Row="4" Grid.Column="0"  Style="{StaticResource GridField}">Rating: </Label>
+            <Slider Grid.Row="4" Grid.Column="1" Margin="3" Value="{Binding Rating}" 
+                Minimum="0" Maximum="5"
+                IsSnapToTickEnabled="True" TickFrequency="1"
+                TickPlacement="Both" />
+            <Label Grid.Row="4" Grid.Column="2" Content="{Binding RatingText, FallbackValue=NA}"/>
+
+            <Label Grid.Row="5" Grid.Column="0"  Style="{StaticResource GridField}">Tags: </Label>
+            <DockPanel Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2"  LastChildFill="True">
                 <Button DockPanel.Dock="Right" Command="{Binding SelectTagsCommand}" >Change...</Button>
-                
                 <Label>
                     <TextBlock Text="{Binding SelectedTagsText}"/>
                 </Label>
             </DockPanel>
-        </ctrl:SmartGrid>
+
+            <Label Grid.Row="6" Grid.Column="0"   VerticalAlignment="Top" >Comments: </Label>
+            <TextBox Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" AcceptsReturn="True" Height="100" 
+                     VerticalContentAlignment="Top" 
+                     Text="{Binding Comments}"
+                     HorizontalScrollBarVisibility="Auto"
+                     VerticalScrollBarVisibility="Auto"/>
+        </Grid>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button Command="{Binding SaveCommand}">Save</Button>

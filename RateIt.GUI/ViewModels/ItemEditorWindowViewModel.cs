@@ -107,6 +107,12 @@ namespace RateIt.GUI.ViewModels
             {
                 return new CommandHelper(() =>
                 {
+                    if (SelectedCategory == null)
+                    {
+                        MessageBoxFactory.ShowError("A category must be selected first.", "Category Not Set", owner: window);
+                        return;
+                    }
+
                     TagsSelectorWindow selector = new TagsSelectorWindow(SelectedCategory, selectedTags);
                     selector.Owner = window;
                     selector.ShowDialog();

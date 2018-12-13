@@ -55,7 +55,8 @@ namespace RateIt.GUI.ViewModels
         }
 
         private void RefreshTags()
-        {
+        {   
+
             var tags = StateManager.Instance.DataStore.GetAllTagsWithCount(SelectedCategory.ID);
 
             unselectedTags.Clear();
