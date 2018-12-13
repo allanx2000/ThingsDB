@@ -6,7 +6,7 @@
         xmlns:ctrl="clr-namespace:RateIt.GUI.Controls"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="RateIt" Height="500" Width="400">
+        Title="ThingsDB" Height="500" Width="400">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
