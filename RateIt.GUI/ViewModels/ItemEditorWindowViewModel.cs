@@ -58,6 +58,11 @@ namespace RateIt.GUI.ViewModels
             }
         }
 
+        public string Title
+        {
+            get { return (existing == null ? "Add" : "Edit") + " Item"; }
+        }
+
         private void SetSelectedTags(List<Tag> tags)
         {
             selectedTags = tags;
@@ -124,6 +129,7 @@ namespace RateIt.GUI.ViewModels
                 {
                     existing.Name = Name;
                     existing.Tags = selectedTags;
+                    existing.Category = SelectedCategory;
                     StateManager.Instance.DataStore.UpsertItem(existing);
                 }
 

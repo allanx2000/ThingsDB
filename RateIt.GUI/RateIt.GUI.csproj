@@ -65,6 +65,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\AttributeType.cs" />
+    <Compile Include="TagsSelectorWindow.xaml.cs">
+      <DependentUpon>TagsSelectorWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TagsEditorWindow.xaml.cs">
       <DependentUpon>TagsEditorWindow.xaml</DependentUpon>
     </Compile>
@@ -85,10 +88,15 @@
     <Compile Include="StateManager.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="ViewModels\ItemEditorWindowViewModel.cs" />
+    <Compile Include="ViewModels\TagsSelectorWindowViewModel.cs" />
     <Compile Include="ViewModels\TagsEditorWindowViewModel.cs" />
     <Compile Include="ViewModels\CategoriesEditorWindowViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\SettingsWindowViewModel.cs" />
+    <Page Include="TagsSelectorWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="TagsEditorWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

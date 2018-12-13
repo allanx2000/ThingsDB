@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
        xmlns:ctrl="clr-namespace:RateIt.GUI.Controls"
-        Title="Item Editor" Height="450" Width="500" WindowStartupLocation="CenterScreen">
+        Title="{Binding Title, FallbackValue='Item Editor'}" Height="450" Width="500" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

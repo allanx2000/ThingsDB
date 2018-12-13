@@ -1,0 +1,53 @@
+﻿<Window x:Class="RateIt.GUI.TagsSelectorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ctrl="clr-namespace:RateIt.GUI.Controls"
+        mc:Ignorable="d"
+        Title="Tags Editor" Height="450" Width="500" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <DockPanel Margin="5" LastChildFill="True">
+            <Label DockPanel.Dock="Left">Category: </Label>
+            <Label HorizontalAlignment="Left" Width="200">
+                <TextBlock Text="{Binding SelectedCategory.Name}"/>
+            </Label>
+        </DockPanel>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0">Unselected:</Label>
+            <ListBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding UnselectedTags.View}" SelectedItem="{Binding UnselectedTag}" DisplayMemberPath="Name"/>
+
+            <StackPanel VerticalAlignment="Center" Grid.Row="1" Grid.Column="1">
+                <Button FontSize="15">&gt;</Button>
+                <Button FontSize="15">&lt;</Button>
+            </StackPanel>
+
+            <Label Grid.Row="0" Grid.Column="2">Selected:</Label>
+            <ListBox Grid.Row="1" Grid.Column="2" ItemsSource="{Binding SelectedTags.View}" SelectedItem="{Binding SelectedTag}" DisplayMemberPath="Name"/>
+
+        </Grid>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Command="{Binding SaveCommand}">Save</Button>
+            <Button Command="{Binding CancelCommand}">Cancel</Button>
+        </StackPanel>
+    </Grid>
+</Window>
