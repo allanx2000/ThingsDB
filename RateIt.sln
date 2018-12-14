@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.28307.106
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RateIt.GUI", "RateIt.GUI\RateIt.GUI.csproj", "{F8C4ECF8-565E-4DE5-BD2B-72E189AB9183}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Innouvous.Utils.Data.SQLiteWrapper", "..\Innouvous.Utils\Innouvous.Utils.SQLiteWrapper\Innouvous.Utils.Data.SQLiteWrapper.csproj", "{183BD0E1-5F1E-45E3-8BE9-34D9B64A5B99}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{F8C4ECF8-565E-4DE5-BD2B-72E189AB9183}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8C4ECF8-565E-4DE5-BD2B-72E189AB9183}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F8C4ECF8-565E-4DE5-BD2B-72E189AB9183}.Release|Any CPU.Build.0 = Release|Any CPU
-		{183BD0E1-5F1E-45E3-8BE9-34D9B64A5B99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{183BD0E1-5F1E-45E3-8BE9-34D9B64A5B99}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{183BD0E1-5F1E-45E3-8BE9-34D9B64A5B99}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{183BD0E1-5F1E-45E3-8BE9-34D9B64A5B99}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
