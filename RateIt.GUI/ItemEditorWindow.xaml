@@ -58,10 +58,10 @@
                 </Label>
             </DockPanel>
 
-            <Label Grid.Row="6" Grid.Column="0"   VerticalAlignment="Top" >Comments: </Label>
+            <Label Grid.Row="6" Grid.Column="0"   VerticalAlignment="Top" >Notes: </Label>
             <TextBox Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" AcceptsReturn="True" Height="100" 
                      VerticalContentAlignment="Top" 
-                     Text="{Binding Comments}"
+                     Text="{Binding Notes}"
                      HorizontalScrollBarVisibility="Auto"
                      VerticalScrollBarVisibility="Auto"/>
         </Grid>

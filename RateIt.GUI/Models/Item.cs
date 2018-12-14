@@ -19,6 +19,7 @@ namespace RateIt.GUI.Models
         }
 
         public string Name { get; set; }
+
         public DateTime CreatedDate {get; set;}
 
         public Category Category { get; set; }
@@ -38,5 +39,10 @@ namespace RateIt.GUI.Models
 
         public override string Value => Name;
 
+        //Attributes
+
+        public string Notes { get; set; }
+        public string URL { get; set; }
+        public int Rating { get; set; }
     }
 }

@@ -52,9 +52,9 @@ namespace RateIt.GUI.ViewModels
                 Name = existing.Name;
                 ID = existing.ID;
 
-                /**
-                 * TODO: Ratings, Url, Attribes
-                 */ 
+                Notes = existing.Notes;
+                URL = existing.URL;
+                Rating = existing.Rating;
             }
         }
 
@@ -92,6 +92,43 @@ namespace RateIt.GUI.ViewModels
         }
 
         public int ID { get; private set; }
+
+
+        public string Notes
+        {
+            get { return Get<string>(); }
+            set
+            {
+                Set(value);
+                RaisePropertyChanged();
+            }
+        }
+
+        public string RatingText
+        {
+            get { return Rating == 0 ? "NA" : Rating.ToString(); }
+        }
+
+        public int Rating
+        {
+            get { return Get<int>(); }
+            set
+            {
+                Set(value);
+                RaisePropertyChanged();
+                RaisePropertyChanged("RatingText");
+            }
+        }
+        public string URL
+        {
+            get { return Get<string>(); }
+            set
+            {
+                Set(value);
+                RaisePropertyChanged();
+            }
+        }
+
 
         public ICommand CancelCommand
         {
@@ -160,6 +197,10 @@ namespace RateIt.GUI.ViewModels
 
                     Item x = new Item(SelectedCategory, Name);
                     x.Tags = selectedTags;
+                    x.Notes = Notes;
+                    x.Rating = Rating;
+                    x.URL = URL;
+
 
                     StateManager.Instance.DataStore.UpsertItem(x);
                 }
@@ -168,6 +209,9 @@ namespace RateIt.GUI.ViewModels
                     existing.Name = Name;
                     existing.Tags = selectedTags;
                     existing.Category = SelectedCategory;
+                    existing.Notes = Notes;
+                    existing.Rating = Rating;
+                    existing.URL = URL;
                     StateManager.Instance.DataStore.UpsertItem(existing);
                 }
 

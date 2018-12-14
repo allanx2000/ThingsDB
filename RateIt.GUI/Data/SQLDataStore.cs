@@ -178,7 +178,27 @@ namespace RateIt.GUI.Data
                     }
                 }
 
-                //TODO: Upsert Other Attributes
+                //Upsert Other Attributes
+                cmd = $"delete from {ItemAttributesTable} where item_id = {item.ID}";
+                client.ExecuteNonQuery(cmd);
+
+                if (!string.IsNullOrEmpty(item.Notes))
+                {
+                    string b64 = Utils.ObjectToString(item.Notes);
+                    client.ExecuteNonQuery($"insert into {ItemAttributesTable} values({item.ID},{(int)AttributeType.Notes},'{b64}')");
+                }
+
+                if (!string.IsNullOrEmpty(item.URL))
+                {
+                    string b64 = Utils.ObjectToString(item.URL);
+                    client.ExecuteNonQuery($"insert into {ItemAttributesTable} values({item.ID},{(int)AttributeType.Url},'{b64}')");
+                }
+
+                if (item.Rating != 0)
+                {
+                    client.ExecuteNonQuery($"insert into {ItemAttributesTable} values({item.ID},{(int)AttributeType.Rating},{item.Rating})");
+                }
+
 
                 txn.Commit();
 
@@ -202,7 +222,33 @@ namespace RateIt.GUI.Data
             Item item = ParseBasicItem(data.Rows[0]);
             item.Tags = GetTagsForItem(id);
 
+            AttachAttributes(item);
+
             return item;
+        }
+
+        private void AttachAttributes(Item item)
+        {
+            DataTable dt = client.ExecuteSelect($"select * from {ItemAttributesTable} where item_id ={item.ID}");
+
+            foreach (DataRow r in dt.Rows)
+            {
+                AttributeType type = (AttributeType)Convert.ToInt32(r["attr_id"]);
+                var value = r["value"];
+
+                switch (type)
+                {
+                    case AttributeType.Notes:
+                        item.Notes = (string) Utils.StringToObject(value.ToString());
+                        break;
+                    case AttributeType.Url:
+                        item.URL = (string)Utils.StringToObject(value.ToString());
+                        break;
+                    case AttributeType.Rating:
+                        item.Rating = Convert.ToInt32(value);
+                        break;
+                }
+            }
         }
 
         private List<Tag> GetTagsForItem(int id)

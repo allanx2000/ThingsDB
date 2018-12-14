@@ -1,5 +1,5 @@
 ﻿CREATE TABLE {0} (
-  item_id		integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+  item_id		integer NOT NULL,
   attr_id		integer NOT NULL,
   value			text NOT NULL,
   /* Keys */

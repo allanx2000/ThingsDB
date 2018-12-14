@@ -8,7 +8,7 @@ namespace RateIt.GUI.Models
 {
     enum AttributeType
     {
-        Comment = 1,
+        Notes = 1,
         Rating = 2,
         Url = 3
     }
