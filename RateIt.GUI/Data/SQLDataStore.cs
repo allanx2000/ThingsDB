@@ -371,10 +371,17 @@ namespace RateIt.GUI.Data
             else
             {
                 items = GetItemsForCategory(criteria.CategoryValue, criteria.Filter);
-                //Utaged
+
+                if (criteria.UntaggedOnly)
+                {
+                    items = (from x in items where x.Tags == null select x).ToList(); 
+                }
             }
 
-            //if (criteria.RatedOnly)
+            if (criteria.RatedOnly)
+            {
+                items = (from x in items where x.Rating > 0 select x).ToList();
+            }
 
             return items;
         }
@@ -481,6 +488,11 @@ namespace RateIt.GUI.Data
             }
 
             return results;
+        }
+
+        public void DeleteItem(Item item)
+        {
+            client.ExecuteNonQuery($"delete from {ItemsTable} where item_id={item.ID}");
         }
     }
 }

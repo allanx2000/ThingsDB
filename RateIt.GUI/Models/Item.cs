@@ -44,5 +44,14 @@ namespace RateIt.GUI.Models
         public string Notes { get; set; }
         public string URL { get; set; }
         public int Rating { get; set; }
+
+        public string RatingString
+        {
+            get
+            {
+                return Rating == 0 ? null : Rating.ToString();
+            }
+        }
+
     }
 }

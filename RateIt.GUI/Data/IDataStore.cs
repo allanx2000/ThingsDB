@@ -27,5 +27,6 @@ namespace RateIt.GUI.Data
         void DeleteTag(int id);
         void UpdateTag(Tag selectedTag);
         List<Tag> GetAllTagsWithCount(int categoryId);
+        void DeleteItem(Item selectedResultItem);
     }
 }

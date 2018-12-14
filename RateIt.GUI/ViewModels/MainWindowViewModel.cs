@@ -48,7 +48,8 @@ namespace RateIt.GUI.ViewModels
             }
         }
 
-        public Item SelectedResultItem {
+        public Item SelectedResultItem
+        {
             get { return Get<Item>(); }
             set
             {
@@ -131,58 +132,40 @@ namespace RateIt.GUI.ViewModels
             }
         }
 
-
-        public ICommand OKCommand
-        {
-            get { return new CommandHelper(SetSettings); }
-        }
-
-        public ICommand CancelCommand
-        {
-            get { return new CommandHelper(() => window.Close()); }
-        }
-
-        private void SetSettings()
-        {
-            try
-            {
-                if (string.IsNullOrEmpty(DBPath))
-                {
-                    throw new Exception("DBPath is required.");
-                }
-                else if (!Path.IsPathRooted(DBPath))
-                {
-                    throw new Exception("Path must be absolute.");
-                }
-
-                StateManager.Settings.DBPath = DBPath;
-                StateManager.Settings.Save();
-
-                window.Close();
-            }
-            catch (Exception e)
-            {
-                MessageBoxFactory.ShowError(e);
-            }
-        }
-
-
         public ICommand ManageCategoriesCommand
         {
             get
             {
                 return new CommandHelper(() =>
-          {
-              CategoriesEditorWindow ce = new CategoriesEditorWindow();
-              ce.Owner = window;
-              ce.ShowDialog();
+                {
+                    CategoriesEditorWindow ce = new CategoriesEditorWindow();
+                    ce.Owner = window;
+                    ce.ShowDialog();
 
-              if (ce.Changed)
-                  LoadWindow();
-          });
+                    if (ce.Changed)
+                        LoadWindow();
+                });
             }
         }
 
+        
+        public ICommand DeleteItemCommand
+        {
+            get
+            {
+                return new CommandHelper(() =>
+                {
+                    if (SelectedResultItem == null)
+                        return;
+                    else if (MessageBoxFactory.ShowConfirmAsBool($"Delete {SelectedResultItem.Name}?", "Delete Item", MessageBoxImage.Exclamation))
+                    {
+                        StateManager.Instance.DataStore.DeleteItem(SelectedResultItem);
+                        Search();
+                    }
+
+                });
+            }
+        }
 
         public ICommand ManageTagsCommand
         {
