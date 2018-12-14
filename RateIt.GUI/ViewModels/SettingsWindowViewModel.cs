@@ -32,6 +32,31 @@ namespace RateIt.GUI.ViewModels
             }
         }
 
+        
+
+        public ICommand BrowsePathCommand
+        {
+            get { return new CommandHelper(BrowsePath); }
+        }
+
+        private void BrowsePath()
+        {
+            try
+            {
+                var dlg = DialogsUtility.CreateSaveFileDialog("Set Database File", overwritePrompt: false);
+                DialogsUtility.AddExtension(dlg, "ThingsDB", "*.tdb");
+
+                dlg.ShowDialog();
+
+                if (!string.IsNullOrEmpty(dlg.FileName))
+                    DBPath = dlg.FileName;
+            }
+            catch (Exception e)
+            {
+                MessageBoxFactory.ShowError(e);
+            }
+        }
+
         public ICommand OKCommand
         {
             get { return new CommandHelper(SetSettings); }

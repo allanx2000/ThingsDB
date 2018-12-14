@@ -16,7 +16,7 @@
         <ctrl:SmartGrid.Content>
             <Label Style="{StaticResource GridField}">DB Path:</Label>
             <DockPanel LastChildFill="True">
-                <Button DockPanel.Dock="Right" Command="{Binding BrowsePath}">...</Button>
+                <Button DockPanel.Dock="Right" Command="{Binding BrowsePathCommand}">...</Button>
                 <TextBox Text="{Binding DBPath, UpdateSourceTrigger=PropertyChanged}"/>
             </DockPanel>
 
