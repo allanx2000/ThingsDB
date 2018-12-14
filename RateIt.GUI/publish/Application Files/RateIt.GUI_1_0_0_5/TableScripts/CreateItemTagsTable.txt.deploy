@@ -1,0 +1,17 @@
+﻿CREATE TABLE {0} (
+  item_id	integer NOT NULL,
+  tag_id	integer NOT NULL,
+  /* Keys */
+  UNIQUE (item_id, tag_id),
+  /* Foreign keys */
+  CONSTRAINT fk_it_items
+    FOREIGN KEY (item_id)
+    REFERENCES {1}(item_id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+  CONSTRAINT fk_it_tags
+    FOREIGN KEY (tag_id)
+    REFERENCES {2}(tag_id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);

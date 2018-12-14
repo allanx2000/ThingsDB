@@ -7,6 +7,12 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="ThingsDB" Height="600" Width="700">
+
+    <Window.InputBindings>
+        <KeyBinding Modifiers="Ctrl" Key="N" Command="{Binding NewItemCommand}"/>
+        <KeyBinding Key="Return" Command="{Binding SearchCommand}"/>
+    </Window.InputBindings>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
