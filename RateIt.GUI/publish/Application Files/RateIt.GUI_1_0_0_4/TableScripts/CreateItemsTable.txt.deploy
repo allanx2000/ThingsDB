@@ -1,0 +1,14 @@
+﻿CREATE TABLE {0} (
+  item_id		integer  PRIMARY KEY AUTOINCREMENT,
+  created_date	text NOT NULL,
+  item_name		varchar(250) NOT NULL,
+  category_id	integer NOT NULL,
+  /* Keys */
+  UNIQUE (category_id, item_name),
+  /* Foreign keys */
+  CONSTRAINT fk_item_category
+    FOREIGN KEY (category_id)
+    REFERENCES {1}(category_id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);

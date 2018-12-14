@@ -55,7 +55,7 @@ namespace RateIt.GUI.ViewModels
         }
 
         private void RefreshTags()
-        {   
+        {
 
             var tags = StateManager.Instance.DataStore.GetAllTagsWithCount(SelectedCategory.ID);
 
@@ -168,5 +168,44 @@ namespace RateIt.GUI.ViewModels
         }
 
         public bool Changed { get; private set; }
+
+
+        public string NewTagName
+        {
+            get { return Get<string>(); }
+            set
+            {
+                Set(value);
+                RaisePropertyChanged();
+            }
+        }
+
+        public ICommand AddNewTagCommand
+        {
+            get
+            {
+                return new CommandHelper(AddNewTag);
+            }
+        }
+
+        private void AddNewTag()
+        {
+            try
+            {
+                if (SelectedCategory == null)
+                    return;
+
+                var tag = StateManager.Instance.DataStore.AddTag(SelectedCategory.ID, NewTagName);
+                NewTagName = null;
+
+                selectedTags.Add(tag);
+
+                Changed = true;
+            }
+            catch (Exception e)
+            {
+                MessageBoxFactory.ShowError(e);
+            }
+        }
     }
 }

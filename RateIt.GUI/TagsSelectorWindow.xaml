@@ -5,11 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ctrl="clr-namespace:RateIt.GUI.Controls"
         mc:Ignorable="d"
-        Title="Tags Editor" Height="450" Width="500" WindowStartupLocation="CenterScreen">
+        Title="Select Tags" Height="450" Width="500" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
@@ -34,7 +35,12 @@
 
             <Label Grid.Row="0" Grid.Column="0">Unselected:</Label>
             <ListBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding UnselectedTags.View}" 
-                     SelectedItem="{Binding UnselectedTag}" DisplayMemberPath="Name"/>
+                     SelectedItem="{Binding UnselectedTag}" DisplayMemberPath="Name">
+
+                <ListBox.InputBindings>
+                    <KeyBinding Key="Right" Command="{Binding SelectCommand}"/>
+                </ListBox.InputBindings>
+            </ListBox>
 
             <StackPanel VerticalAlignment="Center" Grid.Row="1" Grid.Column="1">
                 <Button FontSize="15" Command="{Binding SelectCommand}">&gt;</Button>
@@ -43,11 +49,29 @@
 
             <Label Grid.Row="0" Grid.Column="2">Selected:</Label>
             <ListBox Grid.Row="1" Grid.Column="2" ItemsSource="{Binding SelectedTags.View}" 
-                     SelectedItem="{Binding SelectedTag}" DisplayMemberPath="Name"/>
+                     SelectedItem="{Binding SelectedTag}" DisplayMemberPath="Name">
+                <ListBox.InputBindings>
+                    <KeyBinding Key="Right" Command="{Binding UnselectCommand}"/>
+                </ListBox.InputBindings>
+            </ListBox>
 
         </Grid>
 
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+        <GroupBox Header="New Tag" Grid.Row="2">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="80"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Column="0">Name: </Label>
+                <TextBox Grid.Column="1" Text="{Binding NewTagName}"/>
+                <Button Grid.Column="2" Command="{Binding AddNewTagCommand}" >Add</Button>
+            </Grid>
+        </GroupBox>
+        
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button Command="{Binding OKCommand}">Set</Button>
             <Button Command="{Binding CancelCommand}">Cancel</Button>
         </StackPanel>
