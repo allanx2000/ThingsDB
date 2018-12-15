@@ -1,3 +1,0 @@
-﻿SELECT i.*, t.* FROM {0} m
-join {1} i on i.id = m.item_id
-WHERE m.item_id = {1}

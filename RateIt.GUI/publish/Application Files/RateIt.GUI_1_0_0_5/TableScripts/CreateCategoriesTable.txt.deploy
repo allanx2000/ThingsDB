@@ -1,6 +1,0 @@
-﻿CREATE TABLE {0} (
-  category_id	integer NOT NULL PRIMARY KEY AUTOINCREMENT,
-  category_name	varchar(50) NOT NULL,
-  /* Keys */
-  UNIQUE (category_name)
-);
