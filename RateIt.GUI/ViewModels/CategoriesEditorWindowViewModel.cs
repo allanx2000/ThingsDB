@@ -108,6 +108,12 @@ namespace RateIt.GUI.ViewModels
             }
         }
 
+        public ICommand CloseCommand
+        {
+            get { new CommandHelper(() => window.Close()};
+        }
+
+
         private void SaveCategory()
         {
             try

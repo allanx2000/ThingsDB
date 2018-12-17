@@ -121,15 +121,10 @@ namespace RateIt.GUI.ViewModels
             {
                 if (SelectedTag == null)
                     return;
-                else if (SelectedTag.ItemCount > 0)
-                {
-                    throw new Exception("Cannot delete a tag with items.");
-                }
                 else if (MessageBoxFactory.ShowConfirmAsBool($"Delete {SelectedTag.Name}?", "Confirm Delete"))
                 {
                     StateManager.Instance.DataStore.DeleteTag(SelectedTag.ID);
 
-                    
                     LoadWindow(SelectedCategory.ID);
                 }
             }
@@ -137,6 +132,11 @@ namespace RateIt.GUI.ViewModels
             {
                 MessageBoxFactory.ShowError(e);
             }
+        }
+
+        public ICommand CloseCommand
+        {
+            get { return new CommandHelper(() => window.Close()); }
         }
 
         public ICommand SaveCommand

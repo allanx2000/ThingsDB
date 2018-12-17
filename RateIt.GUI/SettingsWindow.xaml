@@ -7,6 +7,12 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="Settings" Width="400" SizeToContent="Height">
+
+    <Window.InputBindings>
+        <KeyBinding Key="Return" Command="{Binding SetCommand}"/>
+        <KeyBinding Key="Esc" Command="{Binding CancelCommand}"/>
+    </Window.InputBindings>
+
     <ctrl:SmartGrid Orientation="Horizontal">
         <ctrl:SmartGrid.SizeDefinitions>
             <ctrl:SizeDefinition Size="Auto"/>

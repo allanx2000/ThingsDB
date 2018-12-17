@@ -7,6 +7,11 @@
        xmlns:ctrl="clr-namespace:RateIt.GUI.Controls"
         Title="{Binding Title, FallbackValue='Item Editor'}" Width="500" 
         WindowStartupLocation="CenterScreen" SizeToContent="Height">
+    <Window.InputBindings>
+        <KeyBinding Key="Return" Command="{Binding SaveCommand}"/>
+        <KeyBinding Key="Esc" Command="{Binding CancelCommand}"/>
+    </Window.InputBindings>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

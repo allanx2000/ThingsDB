@@ -6,6 +6,10 @@
         xmlns:ctrl="clr-namespace:RateIt.GUI.Controls"
         mc:Ignorable="d"
         Title="Categories Editor" Height="450" Width="500" WindowStartupLocation="CenterScreen">
+
+    <Window.InputBindings>
+        <KeyBinding Key="Esc" Command="{Binding CloseCommand}"/>
+    </Window.InputBindings>
     <DockPanel LastChildFill="True">
 
         <GroupBox DockPanel.Dock="Bottom" Header="Details">
@@ -26,11 +30,11 @@
                         <ColumnDefinition />
                         <ColumnDefinition />
                         <ColumnDefinition />
-                    </Grid.ColumnDefinitions>                   
-                    
-                    <Button HorizontalAlignment="Left" Command="{Binding NewCommand}">New...</Button>
-                    <Button Grid.Column="1" HorizontalAlignment="Center" Command="{Binding SaveCommand}">Save</Button>
-                    <Button Grid.Column="2" HorizontalAlignment="Right" IsEnabled="{Binding CanDelete}" Command="{Binding DeleteCommand}">Delete</Button>
+                    </Grid.ColumnDefinitions>
+
+                    <Button HorizontalAlignment="Left" Command="{Binding NewCommand}">_New...</Button>
+                    <Button Grid.Column="1" HorizontalAlignment="Center" Command="{Binding SaveCommand}">_Save</Button>
+                    <Button Grid.Column="2" HorizontalAlignment="Right" IsEnabled="{Binding CanDelete}" Command="{Binding DeleteCommand}">_Delete</Button>
 
                 </Grid>
 

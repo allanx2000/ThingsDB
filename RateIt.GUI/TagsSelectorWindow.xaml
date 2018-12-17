@@ -6,6 +6,11 @@
         xmlns:ctrl="clr-namespace:RateIt.GUI.Controls"
         mc:Ignorable="d"
         Title="Select Tags" Height="450" Width="500" WindowStartupLocation="CenterScreen">
+    <Window.InputBindings>
+        <KeyBinding Key="Return" Command="{Binding OKCommand}"/>
+        <KeyBinding Key="Esc" Command="{Binding CancelCommand}"/>
+    </Window.InputBindings>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -67,7 +72,7 @@
 
                 <Label Grid.Column="0">Name: </Label>
                 <TextBox Grid.Column="1" Text="{Binding NewTagName}"/>
-                <Button Grid.Column="2" Command="{Binding AddNewTagCommand}" >Add</Button>
+                <Button Grid.Column="2" Command="{Binding AddNewTagCommand}" >_Add</Button>
             </Grid>
         </GroupBox>
         
