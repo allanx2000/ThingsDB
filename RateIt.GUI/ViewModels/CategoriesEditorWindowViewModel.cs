@@ -110,7 +110,7 @@ namespace RateIt.GUI.ViewModels
 
         public ICommand CloseCommand
         {
-            get { new CommandHelper(() => window.Close()};
+            get { return new CommandHelper(() => window.Close()); }
         }
 
 
