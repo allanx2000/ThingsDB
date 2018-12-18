@@ -45,6 +45,11 @@ namespace RateIt.GUI.Models
         public string URL { get; set; }
         public int Rating { get; set; }
 
+        public bool HasUrl
+        {
+            get { return !string.IsNullOrEmpty(URL); }
+        }
+
         public string RatingString
         {
             get

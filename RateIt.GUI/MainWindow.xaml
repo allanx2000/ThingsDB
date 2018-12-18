@@ -78,9 +78,10 @@
             HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
             ScrollViewer.VerticalScrollBarVisibility="Auto"
-            SelectedItem="{Binding SelectedResultItem}" ItemsSource="{Binding Results}">
+            SelectedItem="{Binding SelectedResultItem}" ItemsSource="{Binding Results}" MouseDoubleClick="ListBox_MouseDoubleClick">
                 <ListBox.ContextMenu>
                     <ContextMenu>
+                        <MenuItem Command="{Binding OpenUrlCommand}" Header="Open Url" IsEnabled="{Binding HasUrl}"/>
                         <MenuItem Command="{Binding EditItemCommand}" Header="Edit.."/>
                         <Separator/>
                         <MenuItem Command="{Binding DeleteItemCommand}" Header="Delete"/>

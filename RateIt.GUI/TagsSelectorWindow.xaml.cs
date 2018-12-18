@@ -37,5 +37,15 @@ namespace RateIt.GUI
         {
             return vm.GetSelectedTags();
         }
+
+        private void UnselectedListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            vm.SelectCommand.Execute(null);
+        }
+
+        private void ListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            vm.UnselectCommand.Execute(null);
+        }
     }
 }

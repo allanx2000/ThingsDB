@@ -5,6 +5,7 @@ using RateIt.GUI.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -55,6 +56,7 @@ namespace RateIt.GUI.ViewModels
             {
                 Set(value);
                 RaisePropertyChanged();
+                HasUrl = value == null ? false : value.HasUrl;
             }
         }
 
@@ -233,7 +235,6 @@ namespace RateIt.GUI.ViewModels
             }
         }
 
-        
         public ICommand ResetCommand
         {
             get { return new CommandHelper(() => {
@@ -286,8 +287,6 @@ namespace RateIt.GUI.ViewModels
             }
         }
 
-
-
         private void EditItem(Item existing = null)
         {
             ItemEditorWindow editor = new ItemEditorWindow(existing);
@@ -296,6 +295,36 @@ namespace RateIt.GUI.ViewModels
 
             if (CurrentQuery != null)
                 Search();
+        }
+
+        public ICommand OpenUrlCommand
+        {
+            get
+            {
+                return new CommandHelper(() =>
+                {
+                    try
+                    {
+                        if (SelectedResultItem != null && SelectedResultItem.HasUrl)
+                        {
+                            Process.Start(SelectedResultItem.URL);
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBoxFactory.ShowError(e);
+                    }
+                });
+            }
+        }
+
+        public bool HasUrl {
+            get { return Get<bool>(); }
+            set
+            {
+                Set(value);
+                RaisePropertyChanged();
+            }
         }
     }
 }

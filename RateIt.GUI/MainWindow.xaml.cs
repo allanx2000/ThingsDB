@@ -64,5 +64,12 @@ namespace RateIt.GUI
 
             string s = "";
         }
+
+        private void ListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            //Open URL or Edit?
+
+            vm.EditItemCommand.Execute(null);
+        }
     }
 }

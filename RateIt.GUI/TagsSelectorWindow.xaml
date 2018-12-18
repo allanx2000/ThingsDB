@@ -40,8 +40,8 @@
 
             <Label Grid.Row="0" Grid.Column="0">Unselected:</Label>
             <ListBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding UnselectedTags.View}" 
-                     SelectedItem="{Binding UnselectedTag}" DisplayMemberPath="Name">
-
+                     SelectedItem="{Binding UnselectedTag}" DisplayMemberPath="Name" 
+                     MouseDoubleClick="UnselectedListBox_MouseDoubleClick">
                 <ListBox.InputBindings>
                     <KeyBinding Key="Right" Command="{Binding SelectCommand}"/>
                 </ListBox.InputBindings>
@@ -54,7 +54,7 @@
 
             <Label Grid.Row="0" Grid.Column="2">Selected:</Label>
             <ListBox Grid.Row="1" Grid.Column="2" ItemsSource="{Binding SelectedTags.View}" 
-                     SelectedItem="{Binding SelectedTag}" DisplayMemberPath="Name">
+                     SelectedItem="{Binding SelectedTag}" DisplayMemberPath="Name" MouseDoubleClick="ListBox_MouseDoubleClick">
                 <ListBox.InputBindings>
                     <KeyBinding Key="Right" Command="{Binding UnselectCommand}"/>
                 </ListBox.InputBindings>
