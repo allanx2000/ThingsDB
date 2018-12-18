@@ -22,8 +22,8 @@
         </Grid.RowDefinitions>
 
         <Menu Grid.Row="0">
-            <MenuItem Command="{Binding EditSettingsCommand}" Header="Settings"/>
-            <MenuItem Header="Manage">
+            <MenuItem Command="{Binding EditSettingsCommand}" Header="S_ettings"/>
+            <MenuItem Header="_Manage">
                 <MenuItem Command="{Binding ManageCategoriesCommand}" Header="Categories"/>
                 <MenuItem Command="{Binding ManageTagsCommand}" Header="Tags"/>
             </MenuItem>
@@ -61,7 +61,8 @@
                     </CheckBox>
 
                     <StackPanel Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Button Command="{Binding SearchCommand}">Search</Button>
+                        <Button Command="{Binding SearchCommand}">_Search</Button>
+                        <Button Command="{Binding ResetCommand}">_Reset</Button>
                     </StackPanel>
 
                     <Label Grid.ColumnSpan="3">
